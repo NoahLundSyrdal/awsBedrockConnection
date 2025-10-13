@@ -1,0 +1,92 @@
+:root {
+  --bg:#0b1020;
+  --card:#131a2a;
+  --muted:#9fb0c6;
+  --text:#e9f0ff;
+  --accent:#6aa3ff;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+}
+
+.page { min-height: 100vh; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+.h1 { margin: 0 0 16px; font-size: 22px; letter-spacing: .3px; }
+.h3 { margin-top: 0; }
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  margin-bottom: 16px;
+}
+
+.label { font-weight: 600; margin: 8px 0 6px; color: var(--muted); display: block; }
+
+.input, .textarea, .select, .button {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: #0e1526;
+  color: var(--text);
+  padding: 12px 14px;
+  outline: none;
+}
+
+.textarea { resize: vertical; }
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(106,163,255,.25);
+}
+
+.row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.actions { display: flex; gap: 12px; margin-top: 4px; }
+
+.button { cursor: pointer; font-weight: 700; letter-spacing: .3px; }
+.button.primary { background: var(--accent); color: #051024; border: none; }
+.button.ghost { background: transparent; border: 1px solid rgba(255,255,255,.15); }
+
+.muted { color: var(--muted); }
+.answer { white-space: pre-wrap; }
+.error { color: #ff9f9f; white-space: pre-wrap; }
+
+.list { display: grid; gap: 10px; }
+.item {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: 12px;
+  background: #0e1526;
+}
+
+.src {
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-size: 12px;
+  color: #d0dcff;
+}
+
+.score { font-weight: 700; color: #a6ff9f; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .grid { grid-template-columns: 1.2fr .8fr; }
+}
+
+.spinner { display: none; }
+.spinner.active {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  vertical-align: -3px;
+  margin-left: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
