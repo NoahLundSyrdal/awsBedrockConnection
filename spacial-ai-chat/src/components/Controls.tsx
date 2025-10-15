@@ -1,16 +1,6 @@
-// src/components/Controls.tsx
 import React from "react";
 
-type Props = {
-  query: string;
-  topK: number;
-  minScore: number;
-  returnSource: boolean;
-  loading: boolean;
-  onChange: (patch: Partial<Omit<Props, "loading" | "onChange" | "onAsk" | "onClear">>) => void;
-  onAsk: () => void;
-  onClear: () => void;
-};
+import type { Props } from "../types";
 
 export function Controls({
   query, topK, minScore, returnSource, loading, onChange, onAsk, onClear

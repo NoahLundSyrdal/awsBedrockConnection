@@ -1,3 +1,4 @@
+// src/App.tsx
 import React, { useEffect, useMemo, useState } from "react";
 import "./styles.css";
 import type { RagResponse, Citation, Hit } from "./types";
@@ -21,6 +22,10 @@ export default function App() {
   const endpoint = useMemo(() => (API_URL ? `${API_URL}/query` : ""), []);
 
   async function ask() {
+    if (!endpoint) {
+      setError("VITE_API_URL is not set. Add it in your .env file.");
+      return;
+    }
     setError(null);
     setLoading(true);
     setData(null);
@@ -35,11 +40,8 @@ export default function App() {
           return_source: returnSource,
         }),
       });
-
       const json = (await res.json().catch(() => ({}))) as any;
-      if (!res.ok) {
-        throw new Error(json?.error || json?.message || `HTTP ${res.status} ${res.statusText || ""}`.trim());
-      }
+      if (!res.ok) throw new Error(json?.error || json?.message || `HTTP ${res.status}`);
       setData(json as RagResponse);
     } catch (e: any) {
       setError(e?.message ?? String(e));
@@ -58,19 +60,22 @@ export default function App() {
   const hits = (data as any)?.hits as Hit[] | undefined;
   const answer = (data as any)?.answer as string | undefined;
 
-  // Auto-run once on load for demo
-  useEffect(() => {
-    if (endpoint) ask();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endpoint]);
+  useEffect(() => { if (endpoint) ask(); }, [endpoint]); // auto-run once
 
   return (
     <div className="page">
       <div className="wrap">
         <h1 className="h1">Spacial AI Chat · KB RAG</h1>
 
+        {!API_URL && (
+          <div className="card" style={{ border: "1px solid #ff9f9f" }}>
+            <div className="error">
+              Missing VITE_API_URL. Add it to your .env (e.g. VITE_API_URL=https://...).
+            </div>
+          </div>
+        )}
+
         <Controls
-          apiUrl={API_URL}
           query={query}
           topK={topK}
           minScore={minScore}
@@ -96,3 +101,4 @@ export default function App() {
     </div>
   );
 }
+
