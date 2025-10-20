@@ -1,4 +1,4 @@
-import React from "react";
+// React import not required with JSX runtime; keep file lightweight
 import type { Hit } from "../types";
 import { Score } from "./Score";
 
@@ -17,9 +17,9 @@ export function HitsCard({ hits }: { hits?: Hit[] }) {
           {hits.map((h, i) => (
             <div key={i} className="item">
               <div>
-                <strong>{prettyName(h.source_uri)}</strong> · <Score value={h.score} />
+                <strong>{prettyName(typeof h.source_uri === "string" ? h.source_uri : JSON.stringify(h.source_uri))}</strong> · <Score value={typeof h.score === "number" ? h.score : undefined} />
               </div>
-              <div className="muted">{h.snippet}</div>
+              <div className="muted">{typeof h.snippet === "string" ? h.snippet : JSON.stringify(h.snippet)}</div>
             </div>
           ))}
         </div>

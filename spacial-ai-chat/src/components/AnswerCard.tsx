@@ -1,4 +1,4 @@
-import React from "react";
+// React import not required with JSX runtime; keep file lightweight
 
 export function AnswerCard({ answer, error, hits }: {
   answer?: string;
@@ -11,9 +11,14 @@ export function AnswerCard({ answer, error, hits }: {
       {!error ? (
         <div className="answer">
           {answer
-            ? answer
+            ? (typeof answer === "string" ? answer : JSON.stringify(answer))
             : hits?.length
-            ? (<><div className="muted">RAG disabled or no answer. Top hit:</div><div>{hits[0].snippet}</div></>)
+            ? (
+              <>
+                <div className="muted">RAG disabled or no answer. Top hit:</div>
+                <div>{typeof hits[0].snippet === "string" ? hits[0].snippet : JSON.stringify(hits[0].snippet)}</div>
+              </>
+            )
             : <span className="muted">—</span>}
         </div>
       ) : (

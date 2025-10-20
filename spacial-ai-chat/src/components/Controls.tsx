@@ -1,4 +1,4 @@
-import React from "react";
+// React import not required with JSX runtime; keep file lightweight
 
 import type { Props } from "../types";
 

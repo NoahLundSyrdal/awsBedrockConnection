@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./styles.css";
 import type { RagResponse, Citation, Hit } from "./types";
 import { Controls } from "./components/Controls";
